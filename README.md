@@ -6,6 +6,9 @@
 Parat is a simple remote administration tool(RAT) written in python.
 <br />Also you can read [wiki](https://github.com/micle-fm/Parat/wiki)!
 
+### Change log:
+* Compatible with both python 2 and 3 versions(dont forget that may causes some error.so please share us any error(s))
+
 ### Do you want to try?
 Copy and paste on your terminal:<br />
 `git clone https://github.com/micle-fm/Parat && cd Parat && python main.py`<br />
