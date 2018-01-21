@@ -4,6 +4,7 @@
 # see the COPYING file for the detailed licence terms
 #
 
+from __future__ import print_function
 import argparse
 from lib.ParatPrint import pprint, gray
 from lib.ParatEncrypt import Encode, Decode
@@ -66,4 +67,4 @@ class ParatFirewall:
                 pprint("\n%s\n" % response) if self.colors else pprint("\n%s\n" % gray(response))
 
             except Exception as e:
-                print e
+                print(e)

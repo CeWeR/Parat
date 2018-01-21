@@ -6,7 +6,10 @@
 
 import os
 import shutil
-import ConfigParser
+try:
+    from ConfigParser import ConfigParser
+except ModuleNotFoundError:
+    from configparser import ConfigParser
 from string import ascii_uppercase, ascii_lowercase, digits
 from random import choice
 from lib.ParatPrint import colorize, pprint, gray

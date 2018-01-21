@@ -4,11 +4,11 @@
 # see the COPYING file for the detailed licence terms
 #
 
-from GetIP import *
-from Helper import *
-from ParatPrint import *
-from Version import *
-from ProcessThread import *
-from Completer import *
-from ParatEncrypt import *
-from MiniUtils import *
+from lib.GetIP import *
+from lib.Helper import *
+from lib.ParatPrint import *
+from lib.Version import *
+from lib.ProcessThread import *
+from lib.Completer import *
+from lib.ParatEncrypt import *
+from lib.MiniUtils import *

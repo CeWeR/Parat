@@ -14,10 +14,14 @@ import logging
 import shlex
 import re
 import pty
-import StringIO
+try:
+    import StringIO
+    import Queue
+except ModuleNotFoundError:
+    from io import StringIO
+    import queue as Queue
 import socket
 import signal
-import Queue
 import readline
 import threading
 import sqlite3
@@ -74,27 +78,35 @@ from modules import (
     ParatUninstall,
     ParatLogC
 )
-from Creds import ParatLogin
-from Creator import ParatGenerate
-from ArgumentParser import ParatArgParse
-from Handler import tumultuous
+from core.Creds import ParatLogin
+from core.Creator import ParatGenerate
+from core.ArgumentParser import ParatArgParse
+from core.Handler import tumultuous
 
 
 
+# compatible python 2 and 3
+try: input = raw_input
+except NameError: pass
 
 # set start time
 start_now  = datetime.now()
 log_name   = start_now.strftime("%Y-%m-%d")
 log_name  += ".log"
+log_file   = os.path.join('conf', 'logs', log_name)
 
 # logging configure & prepare <file>
-logging.basicConfig(handler=file, level=logging.DEBUG)
-plog            = logging.getLogger(__name__)
+try:
+    logging.basicConfig(handler=file, level=logging.DEBUG)
+except NameError:
+    logging.basicConfig(filename=log_file, level=logging.DEBUG)
+
+plog = logging.getLogger(__name__)
 plog.propagate  = False
-log_file        = os.path.join('conf', 'logs', log_name)
-log_handler     = logging.FileHandler(log_file)
+
+log_handler = logging.FileHandler(log_file)
 log_handler.setLevel(logging.INFO)
-Formatter       = logging.Formatter(
+Formatter = logging.Formatter(
 '%(asctime)s %(name)s-(%(module)s)[%(process)d]-%(levelname)s  %(lineno)d:%(message)s', "%H:%M:%S")
 log_handler.setFormatter(Formatter)
 plog.addHandler(log_handler)
@@ -406,7 +418,7 @@ class ParatShell(object):
 
     def listen_daemonize(self):
 
-        if not self.used_ports.has_key(self.port):
+        def func():
 
             self.used_ports[self.port] = 1
 
@@ -424,8 +436,17 @@ class ParatShell(object):
 
             plog.info("new thread: " + lname)
 
-        else:
-            pass
+        try:
+            if not self.used_ports.has_key(self.port):
+                func()
+            else:
+                pass
+        except Exception as e:
+            if "'dict' object has no attribute 'has_key'" in str(e):
+                if self.port not in self.used_ports:
+                    func()
+                else:
+                    pass
 
 
 
@@ -472,7 +493,7 @@ class ParatShell(object):
                 check_history_exist(self.history_path)
 
                 if not sys.stdin.closed:
-                    order_cm = raw_input(self.in_main_prompt).strip()
+                    order_cm = input(self.in_main_prompt).strip()
                 else:
                     self.close()
 
@@ -628,7 +649,7 @@ class ParatShell(object):
                 plog.info(str(e))#; break
                 sleep(0.1)
 
-            except Exception, e:
+            except Exception as e:
 
                 # except unknown errors
                 show_trace(self.verbose)
@@ -861,7 +882,7 @@ class ClientShell(ParatShell):
 
 
         def get_user_input():
-            ctrl_command = raw_input(self.in_remote_prompt)
+            ctrl_command = input(self.in_remote_prompt)
             write_history(ctrl_command.strip())
             return ctrl_command.strip()
 
@@ -1376,7 +1397,7 @@ class ClientShell(ParatShell):
                     )
                     while True:
 
-                        x = self.wash(raw_input(prompt_message))
+                        x = self.wash(input(prompt_message))
 
                         if x == 'y' or x == 'yes':
 
@@ -1426,7 +1447,7 @@ class ClientShell(ParatShell):
 
 
 
-            except (ValueError, socket.error), e:
+            except (ValueError, socket.error) as e:
 
                 if not process_bar.Stop:
                     process_bar.Stop = True

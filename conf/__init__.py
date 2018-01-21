@@ -5,7 +5,10 @@
 #
 
 import os
-import ConfigParser
+try:
+    import ConfigParser
+except ModuleNotFoundError:
+    import configparser as ConfigParser
 from lib.ParatPrint import colorize
 
 

@@ -4,6 +4,7 @@
 # see the COPYING file for the detailed licence terms
 #
 
+from __future__ import print_function
 import sys, random
 from threading import Thread
 from time import sleep
@@ -23,7 +24,7 @@ class ParatProcessBar():
 
     def Run(self):
 
-        print self.message_text + "...  ",
+        print(self.message_text + "...  ", end=" ")
         sys.stdout.flush(); i = 0
 
         while not self.Stop:
@@ -34,7 +35,7 @@ class ParatProcessBar():
             elif (i%4) == 3: sys.stdout.write('\b|')
             sys.stdout.flush(); sleep(0.2); i+=1
 
-        print ""; self.Stop = False
+        print(""); self.Stop = False
 
 
 

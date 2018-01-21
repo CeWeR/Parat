@@ -7,8 +7,12 @@
 from os.path import abspath, join, dirname
 from lib.ParatPrint import colorize, pprint
 from lib.Version import __version__
-from ConfigParser import ConfigParser
-import urllib2
+try:
+    from ConfigParser import ConfigParser
+    from urllib2 import urlopen
+except ModuleNotFoundError:
+    from configparser import ConfigParser
+    from urllib.request import urlopen
 
 
 def check_update():
@@ -28,22 +32,21 @@ def check_update():
     try:
 
         updateurl = 'https://raw.githubusercontent.com/micle-fm/Parat/master/conf/parat.version'
-        request = urllib2.urlopen(updateurl)
-        parat_version = str(request.read()).strip()
+        request = urlopen(updateurl)
+        parat_version = request.read().rstrip('\n')
         request.close()
 
     except:
 
         path_to_version_file = join(root_path, "..", "conf", "parat.version")
         with open(path_to_version_file, 'r') as ver_file:
-            parat_version = ver_file.read().strip()
+            parat_version = ver_file.read().rstrip('\n')
         ver_file.close()
 
     if parat_version != __version__:
         pprint(
             colorize(
-                    "Your templates are not synced with your parat version!" + \
-                    "\n\t Update your parat using 'git clone https://github.com/micle-fm/parat' command.\n",
+                    "\t New version aviable on https://github.com/micle-fm/parat .\n",
                     colored=colored,
                     status="WAR"
                 ))

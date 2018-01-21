@@ -5,6 +5,7 @@
 #
 
 import sys
+import six
 from os import system
 
 
@@ -28,7 +29,7 @@ def colorize(input_text, color="", colored=True, status=""):
     if input_text is None:
         return ""
 
-    if type(input_text) not in (str, unicode):
+    if isinstance(input_text, six.string_types):
         input_text = str(input_text)
 
     STOP_COLOR = '\033[0m'

@@ -4,9 +4,9 @@
 # see the COPYING file for the detailed licence terms
 #
 
-from Shell import *
-from Handler import *
-from Creator import *
-from ParatError import *
-from ArgumentParser import *
-from Creds import *
+from core.Shell import *
+from core.Handler import *
+from core.Creator import *
+from core.ParatError import *
+from core.ArgumentParser import *
+from core.Creds import *

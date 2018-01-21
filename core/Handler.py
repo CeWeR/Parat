@@ -5,7 +5,10 @@
 #
 
 import os
-import ConfigParser
+try:
+    from ConfigParser import ConfigParser
+except ModuleNotFoundError:
+    from configparser import ConfigParser
 from time import sleep
 from string import ascii_letters
 from random import choice

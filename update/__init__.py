@@ -4,4 +4,4 @@
 # see the COPYING file for the detailed licence terms
 #
 
-from Updater import *
+from update.Updater import *
