@@ -10,7 +10,6 @@ from lib.ParatPrint import pprint, gray
 from conf import config_file
 
 __author__ = 'micle'
-__version__ = '1.0'
 __date__ = 'May 16 2017'
 
 config = config_file()

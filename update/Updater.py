@@ -6,7 +6,7 @@
 
 from os.path import abspath, join, dirname
 from lib.ParatPrint import colorize, pprint
-from lib.Version import __version__
+
 try:
     from ConfigParser import ConfigParser
     from urllib2 import urlopen
@@ -14,6 +14,8 @@ except ModuleNotFoundError:
     from configparser import ConfigParser
     from urllib.request import urlopen
 
+
+__version__ = '1.1'
 
 def check_update():
 
@@ -46,7 +48,7 @@ def check_update():
     if parat_version != __version__:
         pprint(
             colorize(
-                    "\t New version aviable on https://github.com/micle-fm/parat .\n",
+                    " New version aviable on https://github.com/micle-fm/parat \n",
                     colored=colored,
                     status="WAR"
                 ))
