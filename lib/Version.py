@@ -4,6 +4,7 @@
 # see the COPYING file for the detailed licence terms
 #
 
+from os.path import abspath, join, dirname
 from time import sleep
 from random import randint, choice
 from lib.ParatPrint import pprint, gray
@@ -11,6 +12,10 @@ from conf import config_file
 
 __author__ = 'micle'
 __date__ = 'May 16 2017'
+
+path_to_version_file = join(abspath(join(dirname(__file__))), "..", "conf", "parat.version")
+with open(path_to_version_file, 'r') as ver_file:
+    __version__ = ver_file.read().rstrip('\n')
 
 config = config_file()
 status = config.get('cmd', 'colors').lower()

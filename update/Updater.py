@@ -43,7 +43,6 @@ def check_update():
         path_to_version_file = join(root_path, "..", "conf", "parat.version")
         with open(path_to_version_file, 'r') as ver_file:
             parat_version = ver_file.read().rstrip('\n')
-        ver_file.close()
 
     if parat_version != __version__:
         pprint(
