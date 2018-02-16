@@ -995,7 +995,7 @@ class ClientShell(ParatShell):
 
                 # prepare controlling module
                 sys.stdout.flush()
-                check_update()
+                # check_update()
 
                 # check for ctrl+c signal enabled/disabled
                 check_signal()

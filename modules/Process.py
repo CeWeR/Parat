@@ -25,10 +25,10 @@ class ParatProcess:
 
         while 1:
 
-            if "GETPS ERROR!" in proc:
+            if "ERROR:" in proc:
                 pprint(
                     colorize(
-                        proc,
+                        proc[7:],
                         colored=self.colors,
                         status="ERR"
                 )); break

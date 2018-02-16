@@ -411,8 +411,8 @@ def main():
 
 				ROBOT.send(pencode("#DATA_HANDLER"))
 
-			except:
-				ROBOT.send(pencode("GETPS ERROR!\n"))
+			except Exception as e:
+				ROBOT.send(pencode("ERROR: %s\n" % e))
 
 
 
