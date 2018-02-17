@@ -47,7 +47,7 @@ def check_update():
     if parat_version != __version__:
         pprint(
             colorize(
-                    " New version aviable on https://github.com/micle-fm/parat \n",
+                    "\r New version aviable on https://github.com/micle-fm/parat \n",
                     colored=colored,
                     status="WAR"
                 ))

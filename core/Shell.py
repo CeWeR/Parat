@@ -1561,7 +1561,7 @@ def start_loop(login_obg):
 
     try:
 
-        check_update()
+        threading.Thread(target=check_update).start()
         notif_creds(colors, login_obg)
 
         parat = ParatShell()
