@@ -12,7 +12,7 @@ from string import ascii_uppercase, ascii_lowercase, digits
 
 
 
-updater = Updater('YOUR_BOT_TOKEN')
+updater = Updater('598267889:AAEmvPZMvsDMS4OXfhny8EZrgWUts_eR4dE')
 
 
 def SayHello(bot, update):
